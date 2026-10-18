@@ -43,7 +43,7 @@ export default function Work() {
           // Cases that ship with links (repo / live demo) render as a plain
           // row with action pills — nested anchors are invalid HTML, so the
           // whole-row mailto link is reserved for unlinked cases.
-          const linked = Boolean(c.repo || c.live)
+          const linked = Boolean(c.repo || c.live || c.caseStudy)
           const Row = linked ? 'div' : 'a'
           const rowProps = linked
             ? {}
@@ -66,6 +66,17 @@ export default function Work() {
                 <p>{c.desc}</p>
                 {linked && (
                   <div className="work-actions">
+                    {c.caseStudy && (
+                      <a
+                        className="pill pill--mini pill--solid"
+                        href={c.caseStudy}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor-text="Read the case study"
+                      >
+                        VIEW CASE STUDY ↗
+                      </a>
+                    )}
                     {c.live && (
                       <a
                         className="pill pill--mini pill--solid"

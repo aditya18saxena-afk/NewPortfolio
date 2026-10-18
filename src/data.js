@@ -102,8 +102,9 @@ export const CASES = [
   {
     title: 'CampusCare',
     tags: ['UI', 'Campus', 'Personal'],
-    desc: 'Campus maintenance app UI — clear navigation, usability and a consistent experience for reporting and tracking requests.',
+    desc: 'Campus maintenance app — clear navigation, usability and a consistent experience for reporting and tracking requests. Full process case study inside.',
     img: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop',
+    caseStudy: '/campuscare/',
   },
   {
     title: 'Amazon Clone',
