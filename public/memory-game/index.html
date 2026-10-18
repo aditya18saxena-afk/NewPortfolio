@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Challenge — Aditya Saxena</title>
+    <meta name="description" content="A memory card game built with plain HTML, CSS and JavaScript." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="head">
+        <p class="kicker">GAME · VANILLA JS</p>
+        <h1>Memory Challenge</h1>
+        <p class="sub">Flip two cards and match all eight pairs in as few moves as you can.</p>
+      </header>
+
+      <section class="hud">
+        <div class="stat">
+          <span class="label">MOVES</span>
+          <strong id="moves">0</strong>
+        </div>
+        <div class="stat">
+          <span class="label">PAIRS</span>
+          <strong id="pairs">0 / 8</strong>
+        </div>
+        <div class="stat">
+          <span class="label">TIME</span>
+          <strong id="time">0:00</strong>
+        </div>
+        <button class="pill" id="new" type="button">NEW GAME</button>
+      </section>
+
+      <div class="board-wrap">
+        <div class="board" id="board"></div>
+        <div class="win" id="win">
+          <p class="kicker">ALL PAIRS MATCHED</p>
+          <p class="win-line" id="win-line">0 moves · 0:00</p>
+          <button class="pill pill--solid" id="again" type="button">PLAY AGAIN</button>
+        </div>
+      </div>
+
+      <footer class="foot">Plain HTML, CSS and JavaScript — no libraries, just the DOM.</footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

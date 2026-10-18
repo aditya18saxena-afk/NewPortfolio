@@ -117,8 +117,10 @@ export const CASES = [
   {
     title: 'Memory Challenge',
     tags: ['Game', 'JavaScript'],
-    desc: 'Interactive JS game with score tracking and dynamic DOM manipulation.',
+    desc: 'Memory card game — flip and match all eight pairs with move and time tracking, built with plain JavaScript DOM manipulation.',
     img: 'https://images.unsplash.com/photo-1614294148960-9aa740632a87?q=80&w=1200&auto=format&fit=crop',
+    repo: 'https://github.com/aditya18saxena-afk/MemoryGame_DOM',
+    live: '/memory-game/',
   },
 ]
 
