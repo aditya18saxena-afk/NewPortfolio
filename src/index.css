@@ -506,6 +506,19 @@ html.js [data-reveal].in .squiggle path {
   color: var(--ink);
   user-select: none;
 }
+/* the small "I'M" sits above the first line's left edge, like the reel */
+.silo-in, .silo-line { position: relative; display: inline-block; }
+.silo-type.back .silo-in .silo-line:first-child::before {
+  content: "I'M";
+  position: absolute;
+  left: 0;
+  bottom: calc(100% - 0.4em);
+  font-size: clamp(16px, 3.2vw, 46px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
 .silo-photo {
   grid-area: 1 / 1;
   z-index: 2;
@@ -555,11 +568,11 @@ html.js [data-reveal].in .squiggle path {
    is over the person — not across the whole hero band */
 .silo-hit {
   position: absolute;
-  bottom: 4%;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  height: 85%;
-  aspect-ratio: 724 / 1210;
+  height: 94.8%;
+  aspect-ratio: 709 / 706;
   z-index: 5;
 }
 .silo-hit:hover ~ .silo-black { opacity: 0; }
@@ -585,7 +598,7 @@ html.js [data-reveal].in .squiggle path {
 .trace-line {
   fill: none;
   stroke: var(--violet);
-  stroke-width: 5.5;
+  stroke-width: 3.5;
   stroke-linejoin: round;
   stroke-linecap: round;
   stroke-dasharray: 1;
@@ -595,7 +608,7 @@ html.js [data-reveal].in .squiggle path {
 .t-anchor {
   fill: #fff;
   stroke: var(--violet);
-  stroke-width: 2.5;
+  stroke-width: 1.5;
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
@@ -622,7 +635,7 @@ html.js [data-reveal].in .squiggle path {
   .silo { height: clamp(380px, 47vh, 470px); height: clamp(380px, 47svh, 470px); }
   .silo-type { font-size: clamp(64px, 20vw, 88px); }
   .silo-type.front { display: none; }
-  .silo-fig { height: 68%; }
+  .silo-fig { height: 62%; }
   .silo-vec { display: none; }
 }
 /* small phones (SE-class): tighten the rhythm so pills + cue stay on screen */

@@ -33,28 +33,28 @@ export default function Silhouette({ ready }) {
       className={`silo ${ready ? 'ready' : ''} ${entered ? 'entered' : ''}`}
       style={{ '--silo': 'url("/mypic-mask.png")' }}
     >
-      <h1 className="silo-type back">{PROFILE.firstName}<br />{PROFILE.lastName}<span className="dot">.</span></h1>
+      <h1 className="silo-type back"><span className="silo-in"><span className="silo-line">{PROFILE.firstName}</span><br /><span className="silo-line">{PROFILE.lastName}<span className="dot">.</span></span></span></h1>
       <div className="silo-fig">
         <img className="silo-photo" src="/mypic.jpg" alt="" aria-hidden draggable="false" />
         <img className="silo-black" src="/mypic.jpg" alt="Aditya Saxena" draggable="false" />
         {ready && (
-          <svg className="silo-trace" viewBox="0 0 808 1412" aria-hidden="true">
+          <svg className="silo-trace" viewBox="0 0 808 744" aria-hidden="true">
             <path id="trace-line" className="trace-line" d={SILO_PATH} pathLength="1" />
             {SILO_ANCHORS.map((a, i) => (
               <rect
                 key={i}
                 className="t-anchor"
-                x={a.x - 6.5}
-                y={a.y - 6.5}
-                width="13"
-                height="13"
+                x={a.x - 3.5}
+                y={a.y - 3.5}
+                width="7"
+                height="7"
                 style={{ animationDelay: `${(0.5 + a.t * 2.2).toFixed(2)}s` }}
               />
             ))}
             <g className="t-chip">
-              <g transform="translate(16, 36)">
-                <rect width="130" height="54" rx="11" fill="#121116" />
-                <text x="17" y="35" fontSize="27" fontWeight="700" fontFamily="'JetBrains Mono', monospace" fill="#fff">Pen P</text>
+              <g transform="translate(9, 20)">
+                <rect width="66" height="28" rx="6" fill="#121116" />
+                <text x="9" y="19" fontSize="14" fontWeight="700" fontFamily="'JetBrains Mono', monospace" fill="#fff">Pen P</text>
               </g>
               <animateMotion dur="2.2s" begin="0.5s" fill="freeze">
                 <mpath xlinkHref="#trace-line" />
@@ -63,7 +63,7 @@ export default function Silhouette({ ready }) {
               <animate attributeName="opacity" to="0" dur="0.4s" begin="2.9s" fill="freeze" />
             </g>
             <g className="t-pen">
-              <g transform="scale(2.4)">
+              <g transform="scale(1.25)">
                 <path d="M0 0 L-13 8 L-24 0 L-13 -8 Z" fill="#f4f2ef" stroke="#121116" strokeWidth="1.4" strokeLinejoin="round" />
                 <path d="M-4 0 H-19" stroke="#121116" strokeWidth="1.2" />
                 <circle cx="-17" cy="0" r="2.1" fill="#121116" />
