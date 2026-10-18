@@ -577,9 +577,15 @@ html.js [data-reveal].in .squiggle path {
 }
 .silo-hit:hover ~ .silo-black { opacity: 0; }
 .silo-fig:has(.silo-hit:hover) ~ .silo-type.front { opacity: 0; }
+/* the image reveals inside the traced outline with a top-down wipe, then the
+   black fill settles over it — the reel's "image fills the frame" beat */
+.silo.revealed .silo-photo {
+  transform-origin: 50% 100%;
+  animation: siloImageIn 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
 /* vector trace: the outline draws itself on with the pen, then the shape
    fills in — until the fill lands, the masked layers stay hidden */
-.silo:not(.entered) .silo-photo,
+.silo:not(.entered):not(.revealed) .silo-photo,
 .silo:not(.entered) .silo-black,
 .silo:not(.entered) .silo-type.front { opacity: 0; }
 .silo-trace {
@@ -662,6 +668,10 @@ html.js [data-reveal].in .squiggle path {
 @keyframes anchorPop {
   from { opacity: 0; transform: scale(0.4); }
   to { opacity: 1; transform: scale(1); }
+}
+@keyframes siloImageIn {
+  from { clip-path: inset(0 0 100% 0); transform: scale(1.06); }
+  to { clip-path: inset(0 0 0 0); transform: none; }
 }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 @keyframes blink { 50% { opacity: 0; } }

@@ -5,16 +5,27 @@ import { SILO_PATH, SILO_ANCHORS } from '../siloPath'
 // Giant type with a solid silhouette standing in front —
 // where the figure overlaps the letters they knock out to white. When the
 // intro lifts, a violet vector outline is traced on by the pen (anchor
-// points popping in), then the shape fills in; hover melts it to the photo.
+// points popping in), the image then reveals inside the outline, and the
+// shape settles into its black fill; hover melts it back to the photo.
 export default function Silhouette({ ready }) {
+  const [revealed, setRevealed] = useState(false)
   const [entered, setEntered] = useState(false)
   const [pts, setPts] = useState(0)
 
   useEffect(() => {
     if (!ready) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const t = setTimeout(() => setEntered(true), reduce ? 0 : 3000)
-    return () => clearTimeout(t)
+    if (reduce) {
+      setRevealed(true)
+      setEntered(true)
+      return
+    }
+    const t1 = setTimeout(() => setRevealed(true), 2900)
+    const t2 = setTimeout(() => setEntered(true), 5100)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
   }, [ready])
 
   // "N points" ticks up with the pen as anchors get committed
@@ -30,7 +41,7 @@ export default function Silhouette({ ready }) {
 
   return (
     <div
-      className={`silo ${ready ? 'ready' : ''} ${entered ? 'entered' : ''}`}
+      className={`silo ${ready ? 'ready' : ''} ${revealed ? 'revealed' : ''} ${entered ? 'entered' : ''}`}
       style={{ '--silo': 'url("/mypic-mask.png")' }}
     >
       <h1 className="silo-type back"><span className="silo-in"><span className="silo-line">{PROFILE.firstName}</span><br /><span className="silo-line">{PROFILE.lastName}<span className="dot">.</span></span></span></h1>
@@ -82,7 +93,7 @@ export default function Silhouette({ ready }) {
         {PROFILE.firstName}<br />{PROFILE.lastName}<span className="dot">.</span>
       </h1>
       {ready && (
-        <div className={`silo-vec ${entered ? 'off' : ''}`} aria-hidden="true">
+        <div className={`silo-vec ${revealed ? 'off' : ''}`} aria-hidden="true">
           <span className="chip chip--violet">Vector · aditya.svg</span>
           <span className="mono-label">{pts} point{pts === 1 ? '' : 's'}</span>
         </div>
