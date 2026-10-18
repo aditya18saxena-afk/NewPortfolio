@@ -122,6 +122,14 @@ export const CASES = [
     repo: 'https://github.com/aditya18saxena-afk/MemoryGame_DOM',
     live: '/memory-game/',
   },
+  {
+    title: 'Weather App',
+    tags: ['Web', 'JavaScript', 'API'],
+    desc: 'Weather app — search any city for live temperature, humidity and wind speed, with condition icons and invalid-city handling. Vanilla JavaScript + the OpenWeatherMap API.',
+    img: '/weather-app/preview.png',
+    repo: 'https://github.com/aditya18saxena-afk/weather-app',
+    live: '/weather-app/',
+  },
 ]
 
 export const EXPERIENCE = [
