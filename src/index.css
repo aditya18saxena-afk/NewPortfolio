@@ -193,35 +193,106 @@ button { font-family: inherit; color: inherit; }
 .lg-h { position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px dashed rgba(255, 255, 255, 0.15); }
 .lg-px { position: absolute; transform: translate(10px, 7px); color: rgba(255, 255, 255, 0.4); }
 .loader-frame { position: absolute; inset: 0; display: grid; place-items: center; }
-.loader-a {
-  font-size: clamp(120px, 22vw, 300px);
-  font-weight: 900;
+.loader-stage {
+  position: relative;
+  font-size: clamp(56px, 13vw, 184px);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   color: #f4f2ef;
-  animation: loaderIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.loader-frame .chip {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(calc(-50% - clamp(80px, 12vw, 172px)), calc(-50% - clamp(92px, 15vw, 212px)));
+.loader-word { display: inline-flex; font-weight: 900; }
+.lw-l {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.28s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.lw-l.on { opacity: 1; transform: none; }
 .loader-measure {
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
-  transform: translate(clamp(82px, 12.5vw, 182px), -50%);
+  transform: translateY(-50%);
   width: 3px;
-  height: clamp(90px, 14vw, 192px);
+  height: 0.72em;
   border-radius: 2px;
   background: var(--violet);
+  animation: fadeIn 0.3s ease;
+  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
 }
 .loader-measure .chip {
   position: absolute;
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
+}
+.loader-stage.framed .loader-measure { opacity: 0; }
+.loader-sel {
+  position: absolute;
+  left: -0.3em;
+  top: -0.26em;
+  width: 0;
+  height: 0;
+  border: 1.5px solid var(--violet);
+  opacity: 0;
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1), height 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease;
+}
+.loader-stage.framed .loader-sel {
+  width: calc(100% + 0.6em);
+  height: calc(100% + 0.52em);
+  opacity: 1;
+}
+.lsh {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #f4f2ef;
+  border: 1.5px solid var(--violet);
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.loader-stage.framed .lsh { opacity: 1; transform: none; transition-delay: 0.58s; }
+.loader-stage.framed .lsh:nth-child(2) { transition-delay: 0.62s; }
+.loader-stage.framed .lsh:nth-child(3) { transition-delay: 0.66s; }
+.loader-stage.framed .lsh:nth-child(4) { transition-delay: 0.7s; }
+.loader-stage.framed .lsh:nth-child(5) { transition-delay: 0.74s; }
+.loader-stage.framed .lsh:nth-child(6) { transition-delay: 0.78s; }
+.loader-stage.framed .lsh:nth-child(7) { transition-delay: 0.82s; }
+.loader-stage.framed .lsh:nth-child(8) { transition-delay: 0.86s; }
+.lsh--tl { top: -4px; left: -4px; }
+.lsh--tc { top: -4px; left: calc(50% - 3.5px); }
+.lsh--tr { top: -4px; right: -4px; }
+.lsh--ml { top: calc(50% - 3.5px); left: -4px; }
+.lsh--mr { top: calc(50% - 3.5px); right: -4px; }
+.lsh--bl { bottom: -4px; left: -4px; }
+.lsh--bc { bottom: -4px; left: calc(50% - 3.5px); }
+.lsh--br { bottom: -4px; right: -4px; }
+.loader-tag {
+  position: absolute;
+  left: -0.3em;
+  top: -0.26em;
+  transform: translateY(calc(-100% - 6px)) scale(0.9);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.loader-stage.framed .loader-tag {
+  opacity: 1;
+  transform: translateY(calc(-100% - 6px)) scale(1);
+  transition-delay: 0.58s;
+}
+.loader-size {
+  position: absolute;
+  left: 50%;
+  bottom: -0.26em;
+  transform: translate(-50%, calc(100% + 6px)) scale(0.9);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.loader-stage.framed .loader-size {
+  opacity: 1;
+  transform: translate(-50%, calc(100% + 6px)) scale(1);
+  transition-delay: 0.8s;
 }
 .loader-foot {
   position: absolute;
@@ -493,6 +564,56 @@ html.js [data-reveal].in .squiggle path {
 }
 .silo-hit:hover ~ .silo-black { opacity: 0; }
 .silo-fig:has(.silo-hit:hover) ~ .silo-type.front { opacity: 0; }
+/* vector trace: the outline draws itself on with the pen, then the shape
+   fills in — until the fill lands, the masked layers stay hidden */
+.silo:not(.entered) .silo-photo,
+.silo:not(.entered) .silo-black,
+.silo:not(.entered) .silo-type.front { opacity: 0; }
+.silo-trace {
+  grid-area: 1 / 1;
+  z-index: 2;
+  align-self: end;
+  justify-self: center;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  overflow: visible;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.silo.entered .silo-trace { opacity: 0; }
+.trace-line {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 5.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: drawDash 2.2s linear 0.5s forwards;
+}
+.t-anchor {
+  fill: #fff;
+  stroke: var(--violet);
+  stroke-width: 2.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.4);
+  animation: anchorPop 0.33s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.t-pen, .t-chip { opacity: 0; }
+.silo-vec {
+  position: absolute;
+  left: calc(50% - 342px);
+  top: 7%;
+  display: grid;
+  justify-items: start;
+  gap: 9px;
+  z-index: 6;
+  transition: opacity 0.4s ease;
+}
+.silo-vec.off { opacity: 0; }
 
 /* phones: the name stays legible — the figure drops to the lower third and
    the type scales up, so the two cross like on desktop without swallowing
@@ -502,6 +623,7 @@ html.js [data-reveal].in .squiggle path {
   .silo-type { font-size: clamp(64px, 20vw, 88px); }
   .silo-type.front { display: none; }
   .silo-fig { height: 68%; }
+  .silo-vec { display: none; }
 }
 /* small phones (SE-class): tighten the rhythm so pills + cue stay on screen */
 @media (max-width: 760px) and (max-height: 720px) {
@@ -519,15 +641,15 @@ html.js [data-reveal].in .squiggle path {
 
 /* ---------- buttons on dark, marquee, etc. shared utilities ---------- */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes loaderIn {
-  from { opacity: 0; transform: translateY(26px) scale(0.98); }
-  to { opacity: 1; transform: none; }
-}
 @keyframes riseUp {
   from { opacity: 0; transform: translateY(0.6em); }
   to { opacity: 1; transform: none; }
 }
 @keyframes drawDash { to { stroke-dashoffset: 0; } }
+@keyframes anchorPop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes drift { to { transform: translateX(-50%); } }
@@ -984,4 +1106,5 @@ html.js [data-reveal].in .squiggle path {
   }
   html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
   html.js [data-reveal] .squiggle path { stroke-dashoffset: 0 !important; }
+  .silo-trace { display: none; }
 }
