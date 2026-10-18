@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
-// Intro: dark canvas, guides drawn, "Hello" is typed letter by letter while a
-// width measure hugs the last letter — then a Figma-style selection frame is
-// drawn around the word (handles pop in, chips label the frame) and the
-// curtain lifts to the light hero.
+// Intro, matched to the reel: the first letter lands white on the dark canvas,
+// the world flips to paper and "Hello." types out in ink while a width measure
+// hugs the last letter — then a Figma-style selection frame is drawn around
+// the word (handles pop in, chips label the frame) and the curtain lifts away.
 const WORD = ['H', 'E', 'L', 'L', 'O']
+const TYPE_AT = [140, 430, 570, 710, 850]
 
 export default function Loader({ onDone }) {
   const [step, setStep] = useState(0)
@@ -12,21 +13,23 @@ export default function Loader({ onDone }) {
   const [framed, setFramed] = useState(false)
   const [size, setSize] = useState('')
   const [lift, setLift] = useState(false)
+  const [lit, setLit] = useState(false)
   const [pct, setPct] = useState(0)
   const stageRef = useRef(null)
 
   useEffect(() => {
     const timers = []
-    WORD.forEach((_, i) => timers.push(setTimeout(() => setStep(i + 1), 300 + i * 180)))
-    timers.push(setTimeout(() => setFramed(true), 1460))
+    timers.push(setTimeout(() => setLit(true), 300))
+    WORD.forEach((_, i) => timers.push(setTimeout(() => setStep(i + 1), TYPE_AT[i])))
+    timers.push(setTimeout(() => setFramed(true), 1120))
     timers.push(
       setTimeout(() => {
         const sel = stageRef.current && stageRef.current.querySelector('.loader-sel')
         if (sel) setSize(`${Math.round(sel.offsetWidth)} × ${Math.round(sel.offsetHeight)}`)
-      }, 2060)
+      }, 1560)
     )
-    timers.push(setTimeout(() => setLift(true), 2640))
-    timers.push(setTimeout(() => onDone && onDone(), 2640 + 780))
+    timers.push(setTimeout(() => setLift(true), 1900))
+    timers.push(setTimeout(() => onDone && onDone(), 1900 + 300))
     let v = 0
     const id = setInterval(() => {
       v = Math.min(100, v + 1.9 + Math.random() * 0.6)
@@ -48,7 +51,7 @@ export default function Loader({ onDone }) {
   }, [step])
 
   return (
-    <div className={`loader ${lift ? 'lift' : ''}`} aria-hidden>
+    <div className={`loader ${lit ? 'lit' : ''} ${lift ? 'lift' : ''}`} aria-hidden>
       <div className="loader-guides">
         <span className="lg-v" style={{ left: '35%' }} />
         <span className="lg-v" style={{ left: '65%' }} />
@@ -63,6 +66,7 @@ export default function Loader({ onDone }) {
             {WORD.map((ch, i) => (
               <span key={i} className={`lw-l ${i < step ? 'on' : ''}`}>{ch}</span>
             ))}
+            <span className={`lw-l lw-dot ${step >= 5 ? 'on' : ''}`}>.</span>
           </span>
           {measure !== null && (
             <span className="loader-measure" style={{ left: measure }}>

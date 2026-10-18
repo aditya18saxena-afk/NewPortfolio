@@ -164,13 +164,11 @@ button { font-family: inherit; color: inherit; }
 .hud-tr { top: 20px; right: 28px; }
 .hud-bl { bottom: 20px; left: 28px; display: flex; align-items: center; gap: 12px; }
 .hud-time { position: static; }
-.hud-bar { width: 64px; height: 2px; background: rgba(255, 255, 255, 0.22); position: relative; display: inline-block; }
-.hud-bar i { position: absolute; inset: 0 auto 0 0; background: currentColor; }
 .hud-br { bottom: 20px; right: 28px; }
-@media (max-width: 1599px) {
+@media (max-width: 959px) {
   .hud-bl { display: none; }
 }
-@media (max-width: 1280px) {
+@media (max-width: 700px) {
   .hud-br { display: none; }
 }
 @media (max-width: 760px) {
@@ -185,13 +183,18 @@ button { font-family: inherit; color: inherit; }
   z-index: 200;
   background: var(--dark);
   overflow: hidden;
-  transition: transform 0.78s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), background-color 0.28s ease 0.02s;
 }
 .loader.lift { transform: translateY(-101%); }
+/* the reel flips off the dark beat the moment the first letter lands */
+.loader.lit { background: var(--bg); }
 .loader-guides { position: absolute; inset: 0; animation: fadeIn 0.6s ease 0.1s both; }
-.lg-v { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed rgba(255, 255, 255, 0.15); }
-.lg-h { position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px dashed rgba(255, 255, 255, 0.15); }
-.lg-px { position: absolute; transform: translate(10px, 7px); color: rgba(255, 255, 255, 0.4); }
+.lg-v { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed rgba(255, 255, 255, 0.15); transition: border-color 0.28s ease; }
+.lg-h { position: absolute; left: 0; right: 0; height: 0; border-top: 1.5px dashed rgba(255, 255, 255, 0.15); transition: border-color 0.28s ease; }
+.lg-px { position: absolute; transform: translate(10px, 7px); color: rgba(255, 255, 255, 0.4); transition: color 0.28s ease; }
+.loader.lit .lg-v { border-left-color: rgba(18, 17, 22, 0.16); }
+.loader.lit .lg-h { border-top-color: rgba(18, 17, 22, 0.16); }
+.loader.lit .lg-px { color: rgba(18, 17, 22, 0.42); }
 .loader-frame { position: absolute; inset: 0; display: grid; place-items: center; }
 .loader-stage {
   position: relative;
@@ -199,7 +202,9 @@ button { font-family: inherit; color: inherit; }
   line-height: 1;
   letter-spacing: -0.035em;
   color: #f4f2ef;
+  transition: color 0.28s ease;
 }
+.loader.lit .loader-stage { color: var(--ink); }
 .loader-word { display: inline-flex; font-weight: 900; }
 .lw-l {
   display: inline-block;
@@ -208,6 +213,7 @@ button { font-family: inherit; color: inherit; }
   transition: opacity 0.28s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .lw-l.on { opacity: 1; transform: none; }
+.lw-dot { color: var(--violet); transition-delay: 0.15s; }
 .loader-measure {
   position: absolute;
   left: 0;
@@ -235,7 +241,7 @@ button { font-family: inherit; color: inherit; }
   height: 0;
   border: 1.5px solid var(--violet);
   opacity: 0;
-  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1), height 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1), height 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease;
 }
 .loader-stage.framed .loader-sel {
   width: calc(100% + 0.6em);
@@ -252,14 +258,14 @@ button { font-family: inherit; color: inherit; }
   transform: scale(0.3);
   transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.loader-stage.framed .lsh { opacity: 1; transform: none; transition-delay: 0.58s; }
-.loader-stage.framed .lsh:nth-child(2) { transition-delay: 0.62s; }
-.loader-stage.framed .lsh:nth-child(3) { transition-delay: 0.66s; }
-.loader-stage.framed .lsh:nth-child(4) { transition-delay: 0.7s; }
-.loader-stage.framed .lsh:nth-child(5) { transition-delay: 0.74s; }
-.loader-stage.framed .lsh:nth-child(6) { transition-delay: 0.78s; }
-.loader-stage.framed .lsh:nth-child(7) { transition-delay: 0.82s; }
-.loader-stage.framed .lsh:nth-child(8) { transition-delay: 0.86s; }
+.loader-stage.framed .lsh { opacity: 1; transform: none; transition-delay: 0.45s; }
+.loader-stage.framed .lsh:nth-child(2) { transition-delay: 0.48s; }
+.loader-stage.framed .lsh:nth-child(3) { transition-delay: 0.51s; }
+.loader-stage.framed .lsh:nth-child(4) { transition-delay: 0.54s; }
+.loader-stage.framed .lsh:nth-child(5) { transition-delay: 0.57s; }
+.loader-stage.framed .lsh:nth-child(6) { transition-delay: 0.6s; }
+.loader-stage.framed .lsh:nth-child(7) { transition-delay: 0.63s; }
+.loader-stage.framed .lsh:nth-child(8) { transition-delay: 0.66s; }
 .lsh--tl { top: -4px; left: -4px; }
 .lsh--tc { top: -4px; left: calc(50% - 3.5px); }
 .lsh--tr { top: -4px; right: -4px; }
@@ -279,7 +285,7 @@ button { font-family: inherit; color: inherit; }
 .loader-stage.framed .loader-tag {
   opacity: 1;
   transform: translateY(calc(-100% - 6px)) scale(1);
-  transition-delay: 0.58s;
+  transition-delay: 0.45s;
 }
 .loader-size {
   position: absolute;
@@ -292,7 +298,7 @@ button { font-family: inherit; color: inherit; }
 .loader-stage.framed .loader-size {
   opacity: 1;
   transform: translate(-50%, calc(100% + 6px)) scale(1);
-  transition-delay: 0.8s;
+  transition-delay: 0.62s;
 }
 .loader-foot {
   position: absolute;
@@ -310,9 +316,12 @@ button { font-family: inherit; color: inherit; }
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.14);
   overflow: hidden;
+  transition: background-color 0.28s ease;
 }
+.loader.lit .loader-line { background: rgba(18, 17, 22, 0.12); }
 .loader-line span { display: block; height: 100%; background: var(--violet); transition: width 0.16s linear; }
-.loader-foot .mono-label { color: rgba(255, 255, 255, 0.5); }
+.loader-foot .mono-label { color: rgba(255, 255, 255, 0.5); transition: color 0.28s ease; }
+.loader.lit .loader-foot .mono-label { color: rgba(18, 17, 22, 0.5); }
 
 /* ---------- shared section shell ---------- */
 .section { position: relative; padding: clamp(90px, 12vh, 150px) 28px; background: var(--bg); }
@@ -480,7 +489,7 @@ html.js [data-reveal].in .squiggle path {
   height: clamp(380px, 58vh, 600px);
   opacity: 0;
   transform: translateY(26px);
-  transition: opacity 0.9s ease 0.1s, transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+  transition: opacity 0.6s ease 0.05s, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
 }
 .silo.ready { opacity: 1; transform: none; }
 .silo > * { grid-area: 1 / 1; min-width: 0; min-height: 0; }
@@ -513,7 +522,7 @@ html.js [data-reveal].in .squiggle path {
   position: absolute;
   left: 0;
   bottom: calc(100% - 0.4em);
-  font-size: clamp(16px, 3.2vw, 46px);
+  font-size: clamp(15px, 2.5vw, 36px);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -529,7 +538,8 @@ html.js [data-reveal].in .squiggle path {
   max-width: 100%;
   object-fit: contain;
   object-position: center bottom;
-  transition: opacity 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 .silo-black {
   grid-area: 1 / 1;
@@ -542,18 +552,19 @@ html.js [data-reveal].in .squiggle path {
   object-fit: contain;
   object-position: center bottom;
   filter: brightness(0);
-  transition: opacity 0.45s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 .silo-type.front {
   z-index: 4;
   color: #fff;
   pointer-events: none;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.3s ease;
 }
 .silo-photo,
 .silo-black,
-.silo-type.front {
+.silo-type.front,
+.silo-imwrap {
   -webkit-mask-image: var(--silo);
   mask-image: var(--silo);
   -webkit-mask-size: contain;
@@ -575,19 +586,21 @@ html.js [data-reveal].in .squiggle path {
   aspect-ratio: 709 / 706;
   z-index: 5;
 }
-.silo-hit:hover ~ .silo-black { opacity: 0; }
-.silo-fig:has(.silo-hit:hover) ~ .silo-type.front { opacity: 0; }
-/* the image reveals inside the traced outline with a top-down wipe, then the
-   black fill settles over it — the reel's "image fills the frame" beat */
-.silo.revealed .silo-photo {
-  transform-origin: 50% 100%;
-  animation: siloImageIn 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+/* hover: the dark shape melts away and the photo underneath surfaces */
+.silo.filled .silo-hit:hover ~ .silo-black { opacity: 0; transition: opacity 0.5s ease; }
+.silo.filled .silo-fig:has(.silo-hit:hover) .silo-photo { opacity: 1; }
+.silo-fig:has(.silo-hit:hover) ~ .silo-type.front { opacity: 0; transition: opacity 0.35s ease; }
+/* the reel's choreography: the outline draws on an empty stage, then the
+   shape dissolves in (a quick gray-to-black fill), an "I'M" flashes on the
+   head, and the name focuses in — ink on paper, white where it crosses the
+   figure. Until the fill lands, the masked layers stay hidden */
+.silo:not(.filled) .silo-black,
+.silo:not(.filled) .silo-type.front { opacity: 0; }
+.silo:not(.filled) .silo-type.back .silo-in { opacity: 0; filter: blur(10px); }
+.silo.filled .silo-type.front,
+.silo.filled .silo-type.back .silo-in {
+  transition: opacity 0.35s ease 0.9s, filter 0.45s ease 0.9s;
 }
-/* vector trace: the outline draws itself on with the pen, then the shape
-   fills in — until the fill lands, the masked layers stay hidden */
-.silo:not(.entered):not(.revealed) .silo-photo,
-.silo:not(.entered) .silo-black,
-.silo:not(.entered) .silo-type.front { opacity: 0; }
 .silo-trace {
   grid-area: 1 / 1;
   z-index: 2;
@@ -598,9 +611,9 @@ html.js [data-reveal].in .squiggle path {
   max-width: 100%;
   overflow: visible;
   pointer-events: none;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.4s ease;
 }
-.silo.entered .silo-trace { opacity: 0; }
+.silo.filled .silo-trace { opacity: 0; transition: opacity 0.4s ease 0.45s; }
 .trace-line {
   fill: none;
   stroke: var(--violet);
@@ -609,7 +622,7 @@ html.js [data-reveal].in .squiggle path {
   stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: drawDash 2.2s linear 0.5s forwards;
+  animation: drawDash 1.3s linear 0.5s forwards;
 }
 .t-anchor {
   fill: #fff;
@@ -630,9 +643,34 @@ html.js [data-reveal].in .squiggle path {
   justify-items: start;
   gap: 9px;
   z-index: 6;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease 0.45s;
 }
 .silo-vec.off { opacity: 0; }
+/* the reel's "I'M" beat: it flashes white on the head first, then hands over
+   to the small ink label that sits above the name */
+.silo-imwrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  aspect-ratio: 808 / 744;
+  max-width: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+.silo-im {
+  position: absolute;
+  left: 53.7%;
+  top: 7.3%;
+  transform: translateX(-50%);
+  font-size: clamp(15px, 2.5vw, 36px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.silo.filled .silo-im { animation: siloIm 0.7s ease 0.45s both; }
 
 /* phones: the name stays legible — the figure drops to the lower third and
    the type scales up, so the two cross like on desktop without swallowing
@@ -642,6 +680,7 @@ html.js [data-reveal].in .squiggle path {
   .silo-type { font-size: clamp(64px, 20vw, 88px); }
   .silo-type.front { display: none; }
   .silo-fig { height: 62%; }
+  .silo-imwrap { display: none; }
   .silo-vec { display: none; }
 }
 /* small phones (SE-class): tighten the rhythm so pills + cue stay on screen */
@@ -669,9 +708,11 @@ html.js [data-reveal].in .squiggle path {
   from { opacity: 0; transform: scale(0.4); }
   to { opacity: 1; transform: scale(1); }
 }
-@keyframes siloImageIn {
-  from { clip-path: inset(0 0 100% 0); transform: scale(1.06); }
-  to { clip-path: inset(0 0 0 0); transform: none; }
+@keyframes siloIm {
+  0% { opacity: 0; }
+  21% { opacity: 1; }
+  79% { opacity: 1; }
+  100% { opacity: 0; }
 }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 @keyframes blink { 50% { opacity: 0; } }
@@ -1124,10 +1165,13 @@ html.js [data-reveal].in .squiggle path {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001s !important;
+    animation-delay: 0.001s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001s !important;
+    transition-delay: 0.001s !important;
   }
   html.js [data-reveal] { opacity: 1 !important; transform: none !important; }
   html.js [data-reveal] .squiggle path { stroke-dashoffset: 0 !important; }
   .silo-trace { display: none; }
+  .silo-imwrap { display: none; }
 }

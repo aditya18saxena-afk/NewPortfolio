@@ -93,15 +93,15 @@ export default function App() {
         <div className="hero-stack">
           <span className="ann ann-frame chip chip--violet">Frame: Hero</span>
           <span className="ann ann-h1 chip chip--violet">H1 — 900 / Black</span>
-          <p className="kicker" data-reveal style={{ transitionDelay: '0.15s' }}>
+          <p className="kicker" data-reveal style={{ transitionDelay: '2.5s' }}>
             <span className="kicker-dot" />UI/UX Designer — Ghaziabad, India
           </p>
           <Silhouette ready={loaded} />
-          <p className="hero-line" data-reveal style={{ transitionDelay: '0.45s' }}>
+          <p className="hero-line" data-reveal style={{ transitionDelay: '2.75s' }}>
             I design mobile apps, flows and interfaces where <em>clarity</em> decides everything —
             for products people use every day.
           </p>
-          <div className="hero-pills" data-reveal style={{ transitionDelay: '0.55s' }}>
+          <div className="hero-pills" data-reveal style={{ transitionDelay: '2.9s' }}>
             <a className="pill pill--solid" href="#work" data-cursor-text="Scroll ↓">SEE THE WORK</a>
             <a className="pill" href={`mailto:${PROFILE.email}`} data-cursor-text="Say hello">WRITE TO ME</a>
             <a className="pill" href="/resume-aditya-saxena.pdf" target="_blank" rel="noreferrer" data-cursor-text="Resume PDF">CV ↗</a>
