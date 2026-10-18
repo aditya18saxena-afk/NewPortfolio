@@ -94,6 +94,12 @@ button { font-family: inherit; color: inherit; }
   border-color: var(--violet-deep);
   color: #fff;
 }
+.pill--mini {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 9px 14px;
+  gap: 5px;
+}
 
 /* film grain + custom pointer */
 .noise {
@@ -738,6 +744,12 @@ html.js [data-reveal].in .squiggle path {
   max-width: 560px;
 }
 .work-meta { text-align: right; }
+.work-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
 .work-thumb { display: none; }
 .work-cta { display: flex; justify-content: center; margin-top: clamp(30px, 5vh, 46px); }
 .work-preview {

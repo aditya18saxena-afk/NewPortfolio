@@ -110,6 +110,8 @@ export const CASES = [
     tags: ['Web', 'HTML / CSS / JS'],
     desc: 'E-commerce interface with login-related functionality and JavaScript alerts to support user interactions.',
     img: 'https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1200&auto=format&fit=crop',
+    repo: 'https://github.com/aditya18saxena-afk/Amazon_clone1',
+    live: '/amazon-clone/',
   },
   {
     title: 'Memory Challenge',

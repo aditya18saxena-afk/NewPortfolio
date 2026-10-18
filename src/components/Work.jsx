@@ -39,28 +39,63 @@ export default function Work() {
     <div className="work-wrap">
       <Chapters />
       <ul className="work-list" ref={listRef}>
-        {CASES.map((c, i) => (
+        {CASES.map((c, i) => {
+          // Cases that ship with links (repo / live demo) render as a plain
+          // row with action pills — nested anchors are invalid HTML, so the
+          // whole-row mailto link is reserved for unlinked cases.
+          const linked = Boolean(c.repo || c.live)
+          const Row = linked ? 'div' : 'a'
+          const rowProps = linked
+            ? {}
+            : {
+                href: `mailto:${PROFILE.email}?subject=${encodeURIComponent(`Case: ${c.title}`)}`,
+                'data-cursor-text': `${c.title} ↗`,
+              }
+          return (
           <li
             key={c.title}
             className={`work-row ${active === i ? 'hot' : ''}`}
             onPointerEnter={() => fine.current && setActive(i)}
             onPointerLeave={() => setActive(-1)}
           >
-            <a
-              className="work-link"
-              href={`mailto:${PROFILE.email}?subject=${encodeURIComponent(`Case: ${c.title}`)}`}
-              data-cursor-text={`${c.title} ↗`}
-            >
+            <Row className="work-link" {...rowProps}>
               <span className="work-idx mono-label">{String(i + 1).padStart(2, '0')}</span>
               <img className="work-thumb" src={c.img} alt="" loading="lazy" />
               <div className="work-main">
                 <h3>{c.title}</h3>
                 <p>{c.desc}</p>
+                {linked && (
+                  <div className="work-actions">
+                    {c.live && (
+                      <a
+                        className="pill pill--mini pill--solid"
+                        href={c.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor-text="Visit live site"
+                      >
+                        LIVE SITE ↗
+                      </a>
+                    )}
+                    {c.repo && (
+                      <a
+                        className="pill pill--mini"
+                        href={c.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor-text="View source"
+                      >
+                        SOURCE CODE ↗
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
               <span className="work-meta mono-label">{c.tags.join(' · ')}</span>
-            </a>
+            </Row>
           </li>
-        ))}
+          )
+        })}
       </ul>
       <div className="work-cta">
         <a
