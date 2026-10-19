@@ -77,6 +77,17 @@ export default function Work() {
                         VIEW CASE STUDY ↗
                       </a>
                     )}
+                    {c.apk && (
+                      <a
+                        className="pill pill--mini pill--solid"
+                        href={c.apk}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor-text="Download the Android APK"
+                      >
+                        DOWNLOAD APK ↗
+                      </a>
+                    )}
                     {c.live && (
                       <a
                         className="pill pill--mini pill--solid"

@@ -130,6 +130,15 @@ export const CASES = [
     repo: 'https://github.com/aditya18saxena-afk/weather-app',
     live: '/weather-app/',
   },
+  {
+    title: 'Currency Converter',
+    tags: ['Mobile', 'Flutter', 'Dart'],
+    desc: 'Currency converter app — type an amount on a custom on-screen keypad and instantly convert USD ⇄ INR, with one-tap swap and a dark-purple Material 3 interface. Built with Flutter/Dart and shipped as an installable Android APK.',
+    img: '/currency-converter/preview.png',
+    repo: 'https://github.com/aditya18saxena-afk/currency_converter',
+    live: '/currency-converter/',
+    apk: 'https://github.com/aditya18saxena-afk/currency_converter/releases/latest/download/app-release.apk',
+  },
 ]
 
 export const EXPERIENCE = [
